@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Catálogo de Productos</title>
+  </head>
+  <body>
+    <h1>Catálogo de Productos</h1>
+    {{#each products}}
+      <div>
+        <h2>{{title}}</h2>
+        <p>Precio: {{price}}</p>
+        <p>{{description}}</p>
+        <p>{{category}}</p>
+        <img src={{image}} alt={{title}}>
+      </div>
+    {{/each}}
+  </body>
+</html>
+

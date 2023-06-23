@@ -21,12 +21,13 @@ app.use(express.json())
 // recibe datos del formulario
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
-  res.render("home",{nombre:"Fede Alvarez",titulo:"Proyecto Final"});
-});
+//Rutas
+app.use('/', require('./routes'));
+
 
 app.listen(port, () =>
   console.log(`App funcionando en http://localhost:${port}`)
 );
+
 mongoDBConnect()
 module.exports = app;
