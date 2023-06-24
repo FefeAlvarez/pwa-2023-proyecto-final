@@ -1,18 +1,17 @@
 const express = require("express");
 const fs = require("fs")
 const router = express.Router();
+const ROUTE_PATH = __dirname;
 
-const PATH_ROUTES = __dirname;
-
-const removeExtension = (fileName) => {
-    return fileName.split('.').shift()
+const removerExtension = (fileruta) => {
+    return fileruta.split('.').shift()
 }
 
-fs.readdirSync(PATH_ROUTES).filter((file) => {
-    const name = removeExtension(file)
-    if(name !== 'index'){
-        console.log(`Cargando ruta: /${name}`)
-        router.use(`/${name}`,require(`./${file}`))
+fs.readdirSync(ROUTE_PATH).filter((archivoDeRuta) => {
+    const ruta = removerExtension(archivoDeRuta)
+    if(ruta !== 'index'){
+        console.log(`Cargando ruta ${ruta}`)
+        router.use(`/${ruta}`,require(`./${archivoDeRuta}`)) 
     }
 })
 

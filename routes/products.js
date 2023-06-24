@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const {productModel}=require("../models")
-const {getProducts}= require("../controllers/products")
+const {
+  getAllProducts,
+  getProductById,
+  createProduct
+} = require('../controllers/products');
 
-// Ruta para mostrar la lista de productos
-router.get('/', getProducts);
+router.get('/', getAllProducts);
 
-// Otras rutas como crear un producto, actualizarlo, eliminarlo, etc.
+router.get('/:id', getProductById);
 
+router.post('/', createProduct);
 module.exports = router;
