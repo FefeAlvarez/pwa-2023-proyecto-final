@@ -10,16 +10,16 @@ app.use(cors());
 app.use(express.json());
 const port = process.env.PORT || 3000;
 
-// // Motor de plantillas HBS
-// app.set('view engine', 'hbs');
-// hbs.registerPartials(__dirname + '/views/partials');
+// Motor de plantillas HBS
+app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials');
 
 // Configuración de la carpeta de archivos estáticos
 app.use(express.static('imagesStorage'));
 
 
-// // recibe datos del formulario
-// app.use(express.urlencoded({ extended: false }));
+// recibe datos del formulario
+app.use(express.urlencoded({ extended: false }));
 
 //Rutas
 app.use('/api', require('./routes'));

@@ -1,4 +1,3 @@
-const { matchedData } = require('express-validator');
 const { productModel } = require('../models');
 const { errorHandler } = require('../utils/errorHandler');
 
@@ -21,10 +20,50 @@ const getProductById = async (req, res) => {
     errorHandler(res, 'ERROR AL OBTENER DETALLE DEL PRODUCTO');
   }
 };
+
 const createProduct = async (req, res) => {
   const { body } = req;
-  const data = await productModel.create(body)
-  res.send({data});
+  const data = await productModel.create(body);
+  res.send({ data });
 };
 
-module.exports = { getAllProducts, getProductById, createProduct };
+const modifyProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { body } = req;
+
+    const updatedProduct = await productModel.findByIdAndUpdate(id, body, {
+      new: true
+    });
+
+    if (!updatedProduct) {
+      errorHandler(res, 'PRODUCTO NO ENCONTRADO', 404);
+      return;
+    }
+
+    res.json({ data: updatedProduct });
+  } catch (error) {
+    console.error('ERROR: ', error);
+    errorHandler(res, 'ERROR AL MODIFICAR EL PRODUCTO');
+  }
+};
+
+const deleteProduct = async (req, res) => {
+  try {
+    let { id } = req.params;
+    const deletedProduct = await productModel.findByIdAndDelete({ _id: id });
+    res.json({
+      message: 'El producto se ha eliminado correctamente',
+      data: deletedProduct
+    });
+  } catch (error) {
+    errorHandler(res, 'Error al eliminar el producto');
+  }
+};
+module.exports = {
+  getAllProducts,
+  getProductById,
+  createProduct,
+  modifyProduct,
+  deleteProduct
+};

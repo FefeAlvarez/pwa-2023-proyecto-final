@@ -8,14 +8,9 @@ const UserSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: [true, 'Por favor, ingrese un email'],
-      unique: true
     },
     password: {
-      type: String,
-      required: [true, 'Por favor, ingrese una contraseña'],
-      minlength: 6,
-      maxlength: 25
+      type: String, 
     },
     role: {
       type: ['user', 'admin'],
