@@ -4,7 +4,7 @@ const { errorHandler } = require('../utils/errorHandler');
 const getAllProducts = async (req, res) => {
   try {
     const data = await productModel.find({});
-    res.send(data);
+    res.render('products', { products: data });
   } catch (error) {
     errorHandler(res, 'ERROR AL OBTENER EL LISTADO DE PRODUCTOS');
   }

@@ -3,6 +3,7 @@ const fs = require("fs")
 const router = express.Router();
 const ROUTE_PATH = __dirname;
 
+
 const removerExtension = (fileruta) => {
     return fileruta.split('.').shift()
 }
@@ -14,5 +15,4 @@ fs.readdirSync(ROUTE_PATH).filter((archivoDeRuta) => {
         router.use(`/${ruta}`,require(`./${archivoDeRuta}`)) 
     }
 })
-
 module.exports = router

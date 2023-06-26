@@ -9,7 +9,7 @@ const registerUser = async (req, res) => {
     data.set('password', undefined, { strict: false });
 
     res.status(201);
-    res.send({ data });
+    res.redirect('/api/products');
   } catch (e) {
     errorHandler(res, 'ERROR REGISTRANDO USUARIO NUEVO');
   }
@@ -23,9 +23,24 @@ const loginUser = async (req, res) => {
     return;
   }
   user.set('password', undefined, { strict: false });
-  const data = {
-    user
-  };
-  res.send({ data });
+  res.redirect('/api/products');
 };
-module.exports = { registerUser, loginUser };
+
+const renderLogin = (req, res) => {
+  res.render('login');
+};
+
+const renderHome = (req, res) => {
+  res.render('home');
+};
+
+const renderRegister = (req, res) => {
+  res.render('register');
+};
+module.exports = {
+  registerUser,
+  loginUser,
+  renderLogin,
+  renderHome,
+  renderRegister
+};
