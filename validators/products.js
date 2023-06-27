@@ -7,11 +7,30 @@ const createProductValidation = [
   check('description').exists().notEmpty(),
   check('image').exists().notEmpty(),
   check('category').exists().notEmpty(),
-  check('imageId').exists().notEmpty().isMongoId(),
+ 
 
   (req, res, next) => {
     return validateResults(req, res, next);
   }
 ];
 
-module.exports = { createProductValidation };
+const updateProductValidation = [
+  check('id').exists().notEmpty(),
+  check('title').exists().notEmpty(),
+  check('price').exists().notEmpty(),
+  check('description').exists().notEmpty(),
+  check('image').exists().notEmpty(),
+  check('category').exists().notEmpty(),
+  
+
+  (req, res, next) => {
+    return validateResults(req, res, next);
+  }
+];
+
+const deleteProductValidation = [check('id').exists().notEmpty()];
+module.exports = {
+  createProductValidation,
+  updateProductValidation,
+  deleteProductValidation
+};

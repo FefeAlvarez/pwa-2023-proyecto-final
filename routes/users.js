@@ -1,24 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const {registerUser, loginUser, renderLogin, renderHome, renderRegister}=require("../controllers/users")
+const {registerUser, loginUser, logoutUser}=require("../controllers/users");
+const { registerUserValidation,loginUserValidation } = require('../validators/users');
 
 /**
  * Registro de usuario nuevo
  */
-router.post("/register",registerUser)
-router.get("/register", renderRegister);
+router.post("/register",registerUserValidation, registerUser)
 
 /**
  * Login de un usuario existente
  */
-router.post("/login",loginUser)
-router.get("/login", renderLogin);
+router.post("/login",loginUserValidation,loginUser)
 
-/**
- * Home
- */
-router.get('/', renderHome);
-
-
-
+router.post('/logout', logoutUser);
 module.exports = router;

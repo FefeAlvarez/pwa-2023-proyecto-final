@@ -4,7 +4,7 @@ const { errorHandler } = require('../utils/errorHandler');
 const getAllProducts = async (req, res) => {
   try {
     const data = await productModel.find({});
-    res.render('products', { products: data });
+    res.json({data})
   } catch (error) {
     errorHandler(res, 'ERROR AL OBTENER EL LISTADO DE PRODUCTOS');
   }
@@ -15,7 +15,7 @@ const getProductById = async (req, res) => {
     const { params } = req;
     const _id = params.id;
     const data = await productModel.findOne({ _id });
-    res.send({ data });
+    res.json({ data });
   } catch (error) {
     errorHandler(res, 'ERROR AL OBTENER DETALLE DEL PRODUCTO');
   }
@@ -24,7 +24,7 @@ const getProductById = async (req, res) => {
 const createProduct = async (req, res) => {
   const { body } = req;
   const data = await productModel.create(body);
-  res.send({ data });
+  res.json({ data });
 };
 
 const modifyProduct = async (req, res) => {

@@ -7,7 +7,9 @@ const {
   modifyProduct,
   deleteProduct
 } = require('../controllers/products');
-const { createProductValidation } = require('../validators/products');
+const { createProductValidation, updateProductValidation, deleteProductValidation } = require('../validators/products');
+const checkUserRole = require('../middlewares/checkUserRole');
+
 
 /**
  * Obtener listado completo de productos
@@ -22,11 +24,16 @@ router.get('/:id', getProductById);
 /**
  * Crear un producto
  */
-router.post('/', createProductValidation, createProduct);
+router.post('/', createProductValidation, checkUserRole, createProduct);
 
 /**
  * Modificar un producto
  */
-router.put('/:id', modifyProduct);
-router.delete('/:id', deleteProduct);
+router.put('/:id', updateProductValidation, checkUserRole, modifyProduct);
+
+/**
+ * Eliminar un producto
+ */
+router.delete('/:id', deleteProductValidation, checkUserRole, deleteProduct);
+
 module.exports = router;
