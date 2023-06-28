@@ -4,20 +4,22 @@ const cors = require('cors');
 const mongoDBConnect = require('./config/mongo');
 const session = require('express-session');
 
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8081;
 
-//Sesión
-app.use(
-  session({
-    secret: '123456',
-    resave: false,
-    saveUninitialized: false
-  })
-);
+// //Sesión
+// app.use(
+//   session({
+//     secret: '123456',
+//     resave: false,
+//     saveUninitialized: false,
+//     store: new MongoStore({ mongooseConnection: mongoose.connection })
+//   })
+// );
 
 // Configuración de la carpeta de archivos estáticos
 app.use(express.static('imagesStorage'));
