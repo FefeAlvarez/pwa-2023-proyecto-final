@@ -1,6 +1,5 @@
 const { productModel } = require('../models');
 const { errorHandler } = require('../utils/errorHandler');
-const { loginUser } = require('./users');
 
 const getAllProducts = async (req, res) => {
   try {

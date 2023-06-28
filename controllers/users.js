@@ -57,17 +57,12 @@ const loginUser = async (req, res) => {
     errorHandler(res, 'ERROR_LOGIN_USER');
   }
 };
-// const logoutUser = (req, res) => {
-//   req.session.destroy((err) => {
-//     if (err) {
-//       errorHandler(res, 'Error al cerrar sesión', 500);
-//       return;
-//     }
-//     res.json({ redirectUrl: 'http://localhost:3000/' });
-//   });
-// };
+const logoutUser = (req, res) => {
+  res.clearCookie('token');
+  res.json({ redirectUrl: 'http://localhost:3000/' });
+};
 module.exports = {
   registerUser,
-  loginUser
-  // logoutUser
+  loginUser,
+  logoutUser
 };
