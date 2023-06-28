@@ -11,15 +11,7 @@ app.use(cors());
 app.use(express.json());
 const port = process.env.PORT || 8081;
 
-// //Sesión
-// app.use(
-//   session({
-//     secret: '123456',
-//     resave: false,
-//     saveUninitialized: false,
-//     store: new MongoStore({ mongooseConnection: mongoose.connection })
-//   })
-// );
+
 
 // Configuración de la carpeta de archivos estáticos
 app.use(express.static('imagesStorage'));
