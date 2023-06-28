@@ -1,14 +1,20 @@
 // Middleware para verificar el rol de usuario
-const checkUserRole = (req, res, next) => {
-    const { role } = req.user; 
-  console.log("rol, ",role);
-    // Si el rol del usuario es "user", no se permite el delete, put o create
-    if (role === 'user' && (req.method === 'DELETE' || req.method === 'PUT' || req.method === 'POST')) {
-      return res.status(403).json({ error: 'Acceso denegado, no es ADMIN' });
-    }
-  
-    
-    next();
-  };
 
-  module.exports=checkUserRole
+const { errorHandler } = require('../utils/errorHandler');
+
+const checkUserRole = (roles) => (req, res, next) => {
+  try {
+    const { user } = req;
+    const rolesDeUsuario = user.role;
+    const tienePermisos = roles.some((aRole) => rolesDeUsuario.includes(aRole));
+    if (!tienePermisos) {
+      errorHandler(res, 'el usuario no tiene permisos', 403);
+      return;
+    }
+    next();
+  } catch (error) {
+    errorHandler(res, 'Error con los permisos');
+  }
+};
+
+module.exports = checkUserRole;

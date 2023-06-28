@@ -18,7 +18,6 @@ const signToken = async (user) => {
 
 const verifyToken = async (tokenJwt) => {
   try{
-    console.log("esto llega",tokenJwt);
     const token= await jwtoken.verify(tokenJwt, JWT_SECRET)
     return token
   }catch(e){

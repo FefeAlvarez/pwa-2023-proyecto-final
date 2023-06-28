@@ -13,30 +13,31 @@ const {
   deleteProductValidation
 } = require('../validators/products');
 const checkUserRole = require('../middlewares/checkUserRole');
+const userAuthMiddleware = require('../middlewares/userAuthMiddleware');
 
 /**
  * Obtener listado completo de productos
  */
-router.get('/', getAllProducts);
+router.get('/', userAuthMiddleware, getAllProducts);
 
 /**
  * Obtener detalle de un producto
  */
-router.get('/:id', getProductById);
+router.get('/:id', userAuthMiddleware, getProductById);
 
 /**
  * Crear un producto
  */
-router.post('/', createProductValidation, createProduct);
+router.post('/', userAuthMiddleware, checkUserRole(["admin"]), createProductValidation, createProduct);
 
 /**
  * Modificar un producto
  */
-router.put('/:id', updateProductValidation, modifyProduct);
+router.put('/:id', userAuthMiddleware, checkUserRole(["admin"]), updateProductValidation, modifyProduct);
 
 /**
  * Eliminar un producto
  */
-router.delete('/:id', deleteProductValidation, deleteProduct);
+router.delete('/:id', userAuthMiddleware, checkUserRole(["admin"]), deleteProductValidation, deleteProduct);
 
 module.exports = router;

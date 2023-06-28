@@ -4,7 +4,6 @@ const { signToken } = require('../utils/jwtokenHandler');
 const { errorHandler } = require('../utils/errorHandler');
 const { userModel } = require('../models');
 
-
 const registerUser = async (req, res) => {
   try {
     req = matchedData(req);
@@ -26,7 +25,6 @@ const registerUser = async (req, res) => {
   }
 };
 
-
 const loginUser = async (req, res) => {
   try {
     req = matchedData(req);
@@ -47,6 +45,7 @@ const loginUser = async (req, res) => {
     }
 
     user.set('password', undefined, { strict: false });
+
     const data = {
       token: await signToken(user),
       user
@@ -67,7 +66,8 @@ const loginUser = async (req, res) => {
 //     res.json({ redirectUrl: 'http://localhost:3000/' });
 //   });
 // };
-module.exports = { registerUser, 
-  loginUser, 
-  // logoutUser 
+module.exports = {
+  registerUser,
+  loginUser
+  // logoutUser
 };

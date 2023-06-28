@@ -4,10 +4,9 @@ const { loginUser } = require('./users');
 
 const getAllProducts = async (req, res) => {
   try {
-    
-    
+    const user = req.user;
     const data = await productModel.find({});
-    res.json({data, user})
+    res.json({ data, user });
   } catch (error) {
     errorHandler(res, 'ERROR AL OBTENER EL LISTADO DE PRODUCTOS');
   }
@@ -26,8 +25,6 @@ const getProductById = async (req, res) => {
 
 const createProduct = async (req, res) => {
   const { body } = req;
-  console.log(body);
-  console.log("user",req.user);
   const data = await productModel.create(body);
   res.json({ data });
 };
