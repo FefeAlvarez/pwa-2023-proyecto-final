@@ -2,8 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoDBConnect = require('./config/mongo');
-const session = require('express-session');
-
 
 const app = express();
 
